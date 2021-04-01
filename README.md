@@ -81,14 +81,18 @@ https://github.com/didi/delta/blob/master/egs/iemocap/emo/v1/local/python/mocap_
 # How to run? 
 ### Run hyperparameter tuning
 ```
+# 超参数调优，非必须
 python3 -m speech_emotion_recognition.run_hyperparameter_tuning -m acoustic-spectrogram
 ```
 ### Run training
 ```
-python3 -m speech_emotion_recognition.run_training_ensemble -m acoustic-spectrogram
+# python3 -m speech_emotion_recognition.run_training_ensemble -m acoustic-spectrogram # 错误
+# 训练单个模型
+python3 -m speech_emotion_recognition.run_training -m acoustic-spectrogram
 ```
 ### Run ensemble training
 ```
+# 训练ensemble模型，融合模型
 python3 -m speech_emotion_recognition.run_training_ensemble -a /path/to/acoustic_spec_model.torch -l /path/to/linguistic_model.torch
 ```
 ### Run evaluation

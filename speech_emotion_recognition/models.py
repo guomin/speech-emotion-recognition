@@ -35,7 +35,7 @@ class AttentionLSTM(LoadableModule):
         self.dropout = torch.nn.Dropout(cfg.dropout)
         self.dropout2 = torch.nn.Dropout(cfg.dropout2)
 
-        self.lstm = nn.LSTM(self.embedding_length, self.hidden_size)
+        self.lstm = nn.LSTM(self.embedding_length, self.hidden_size) # 隐含状态描述句子、段落和时间序列
         self.label = nn.Linear(self.hidden_size, self.output_size)
 
     def attention_net(self, lstm_output, final_state):
@@ -85,7 +85,7 @@ class CNN(LoadableModule):
         super(CNN, self).__init__()
         self.conv_layers = self._build_conv_layers(cfg)
         self.out_size = cfg.input_size / (cfg.pool_size**len(cfg.num_filters))
-        self.flat_size = cfg.num_filters[len(cfg.num_filters)-1] * self.out_size**2
+        self.flat_size = int(cfg.num_filters[len(cfg.num_filters)-1] * self.out_size**2)
         self.fc2 = nn.Linear(self.flat_size, cfg.num_classes)
         self.dropout = torch.nn.Dropout(cfg.dropout)
 
